@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://4jlh8qwf4lpn"]
+
+[ext_resource type="Texture2D" uid="uid://crdkp2h2k2uh5" path="res://icon.svg" id="1_jea0t"]
+[ext_resource type="Script" uid="uid://274dlg72g0n1" path="res://assets/scripts/ability.gd" id="1_s3fsb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0bojm"]
+size = Vector2(120, 120)
+
+[node name="Ability" type="Node2D" unique_id=1023075944]
+script = ExtResource("1_s3fsb")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=236214347]
+scale = Vector2(0.1, 0.1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1800539317]
+position = Vector2(-7.152556e-06, -7.152556e-06)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_0bojm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1515731110]
+modulate = Color(0.28767228, 0.7568144, 0.36547545, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_jea0t")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
