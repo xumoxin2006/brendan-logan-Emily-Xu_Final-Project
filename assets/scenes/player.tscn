@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dvgpsmhvy6pdh"]
+
+[ext_resource type="Texture2D" uid="uid://crdkp2h2k2uh5" path="res://icon.svg" id="1_rwm0n"]
+[ext_resource type="Script" uid="uid://djjbmg78wuvg0" path="res://assets/scripts/player.gd" id="1_s027a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0bojm"]
+size = Vector2(12, 12)
+
+[node name="Player" type="CharacterBody2D" unique_id=1180427411]
+script = ExtResource("1_s027a")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1936234193]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_rwm0n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1579933668]
+shape = SubResource("RectangleShape2D_0bojm")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1490803983]
+zoom = Vector2(6, 6)
+
+[node name="DashCooldown" type="Timer" parent="." unique_id=410096942]
+
+[node name="DashLength" type="Timer" parent="." unique_id=1056162834]
+wait_time = 0.15
+
+[connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="DashLength" to="." method="_on_dash_length_timeout"]
