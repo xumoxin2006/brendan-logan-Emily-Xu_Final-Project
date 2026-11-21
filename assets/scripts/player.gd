@@ -3,26 +3,44 @@ class_name Player;
 
 @export var speed: float = 70;
 @export var jump_speed: float = -200;
-@export var dash_speed: float = 100;
+@export var max_jumps: int = 1;
+@export var dash_speed: float = 110;
 @export var dash_lift: float = 50;
 @export var acceleration: float = 0.12;
 @export var deceleration: float = 0.3;
 
+@onready var coyote_time = $CoyoteTime;
 @onready var dash_cooldown = $DashCooldown;
 @onready var dash_length = $DashLength;
 
+var coyote_time_active: bool = false;
 var can_dash: bool = true;
 var dashing: bool = false;
 var climbing: bool = false;
 
+var jumps: int = 0;
 var cur_decel: float = deceleration;
 
 func platformer_movement(dt: float) -> void:
 	if not is_on_floor():
+		if (jumps == 0):
+			jumps = max_jumps;
+		
+		if (coyote_time.is_stopped() and coyote_time_active):
+			coyote_time.start();
+		
 		velocity += get_gravity() * dt;
-
-	if Input.is_action_just_pressed("Jump") and is_on_floor():
+	else:
+		coyote_time_active = true;
+		coyote_time.stop();
+		jumps = 0;
+	
+	# can jump if 1. grounded 2. coyote time active or 3. coyote time is no longer acitve but you have more jumps to you
+	if (Input.is_action_just_pressed("Jump") and (is_on_floor() or coyote_time_active or (not coyote_time_active and jumps < max_jumps))):
 		velocity.y = jump_speed;
+		coyote_time_active = false;
+		coyote_time.stop();
+		jumps+=1;
 
 	if (not dashing and Input.is_action_pressed("Right")):
 		velocity.x = lerp(velocity.x, speed, acceleration);
@@ -53,6 +71,9 @@ func platformer_movement(dt: float) -> void:
 		cur_decel = deceleration;
 
 func climb_movement() -> void:
+	# allows player to jump off ladder
+	coyote_time_active = true;
+	
 	if Input.is_action_pressed("Right"):
 		velocity.x = lerp(velocity.x, speed, acceleration);
 	elif Input.is_action_pressed("Left"):
@@ -73,10 +94,20 @@ func _physics_process(delta: float) -> void:
 	else:
 		platformer_movement(delta);
 		
+	debug_show_coyote_time();
 	move_and_slide();
+
+func _on_coyote_time_timeout() -> void:
+	coyote_time_active = false;
 
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true;
 
 func _on_dash_length_timeout() -> void:
 	dashing = false;
+
+func debug_show_coyote_time():
+	if (coyote_time_active):
+		self.modulate = Color.AQUAMARINE;
+	else:
+		self.modulate = Color.WHITE;
