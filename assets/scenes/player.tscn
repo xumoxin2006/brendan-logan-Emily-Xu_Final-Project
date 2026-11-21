@@ -20,9 +20,17 @@ shape = SubResource("RectangleShape2D_0bojm")
 zoom = Vector2(6, 6)
 
 [node name="DashCooldown" type="Timer" parent="." unique_id=410096942]
+wait_time = 0.8
+one_shot = true
 
 [node name="DashLength" type="Timer" parent="." unique_id=1056162834]
 wait_time = 0.15
+one_shot = true
+
+[node name="CoyoteTime" type="Timer" parent="." unique_id=890960968]
+wait_time = 0.1
+one_shot = true
 
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="DashLength" to="." method="_on_dash_length_timeout"]
+[connection signal="timeout" from="CoyoteTime" to="." method="_on_coyote_time_timeout"]
