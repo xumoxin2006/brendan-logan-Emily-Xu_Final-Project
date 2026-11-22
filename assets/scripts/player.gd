@@ -3,7 +3,6 @@ class_name Player;
 
 @export var speed: float = 70;
 @export var jump_speed: float = -200;
-@export var max_jumps: int = 1;
 @export var dash_speed: float = 110;
 @export var dash_lift: float = 50;
 @export var acceleration: float = 0.12;
@@ -24,7 +23,7 @@ var cur_decel: float = deceleration;
 func platformer_movement(dt: float) -> void:
 	if not is_on_floor():
 		if (jumps == 0):
-			jumps = max_jumps;
+			jumps = Global.max_jumps;
 		
 		if (coyote_time.is_stopped() and coyote_time_active):
 			coyote_time.start();
@@ -35,8 +34,8 @@ func platformer_movement(dt: float) -> void:
 		coyote_time.stop();
 		jumps = 0;
 	
-	# can jump if 1. grounded 2. coyote time active or 3. coyote time is no longer acitve but you have more jumps to you
-	if (Input.is_action_just_pressed("Jump") and (is_on_floor() or coyote_time_active or (not coyote_time_active and jumps < max_jumps))):
+	# can jump if 1. grounded 2. coyote time active or 3. coyote time is no longer acitve but you have more jumps to use
+	if (Input.is_action_just_pressed("Jump") and (is_on_floor() or coyote_time_active or (not coyote_time_active and jumps < Globals.max_jumps))):
 		velocity.y = jump_speed;
 		coyote_time_active = false;
 		coyote_time.stop();

@@ -8,6 +8,7 @@ size = Vector2(120, 120)
 
 [node name="Ability" type="Node2D" unique_id=1023075944]
 script = ExtResource("1_s3fsb")
+ability = null
 
 [node name="Area2D" type="Area2D" parent="." unique_id=236214347]
 scale = Vector2(0.1, 0.1)
