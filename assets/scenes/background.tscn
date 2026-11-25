@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b4m547hnpk03r"]
+
+[ext_resource type="Texture2D" uid="uid://bbe8x504labxt" path="res://assets/sprites/bg/background_grass.png" id="1_wfag3"]
+
+[node name="Background" type="Node2D" unique_id=950343182]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1411449756]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=2130206226]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" unique_id=787336942]
+texture = ExtResource("1_wfag3")
+offset = Vector2(110, 50)

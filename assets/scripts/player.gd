@@ -8,9 +8,12 @@ class_name Player;
 @export var acceleration: float = 0.12;
 @export var deceleration: float = 0.3;
 
+@onready var sprite = $AnimatedSprite2D
 @onready var coyote_time = $CoyoteTime;
 @onready var dash_cooldown = $DashCooldown;
 @onready var dash_length = $DashLength;
+
+var flip_h: bool = false;
 
 var coyote_time_active: bool = false;
 var can_dash: bool = true;
@@ -19,6 +22,9 @@ var climbing: bool = false;
 
 var jumps: int = 0;
 var cur_decel: float = deceleration;
+
+func _ready() -> void:
+	add_to_group("player");
 
 func platformer_movement(dt: float) -> void:
 	if not is_on_floor():
@@ -43,10 +49,15 @@ func platformer_movement(dt: float) -> void:
 
 	if (not dashing and Input.is_action_pressed("Right")):
 		velocity.x = lerp(velocity.x, speed, acceleration);
+		flip_h = false;
 	elif (not dashing and Input.is_action_pressed("Left")):
 		velocity.x = lerp(velocity.x, -speed, acceleration);
+		flip_h = true;
 	else:
 		velocity.x = lerp(velocity.x, 0.0, cur_decel)
+		
+	if (velocity.x != 0 and is_on_floor()):
+		sprite.play("walk");
 	
 	if (Globals.unlocked_dash and can_dash and Input.is_action_just_pressed("Dash")):
 		can_dash = false;
@@ -88,12 +99,13 @@ func climb_movement() -> void:
 		velocity.y = lerp(velocity.y, 0.0, deceleration);
 
 func _physics_process(delta: float) -> void:
+	sprite.flip_h = flip_h;
+	
 	if (climbing):
 		climb_movement();
 	else:
 		platformer_movement(delta);
 		
-	debug_show_coyote_time();
 	move_and_slide();
 
 func _on_coyote_time_timeout() -> void:
