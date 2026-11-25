@@ -2,22 +2,69 @@
 
 [ext_resource type="Texture2D" uid="uid://crdkp2h2k2uh5" path="res://icon.svg" id="1_rwm0n"]
 [ext_resource type="Script" uid="uid://djjbmg78wuvg0" path="res://assets/scripts/player.gd" id="1_s027a"]
+[ext_resource type="Texture2D" uid="uid://s3bc2mhx7bvu" path="res://assets/sprites/player_walk.png" id="3_14505"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0bojm"]
-size = Vector2(12, 12)
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wcc8"]
+atlas = ExtResource("3_14505")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8sknh"]
+atlas = ExtResource("3_14505")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gfpk"]
+atlas = ExtResource("3_14505")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hrit"]
+atlas = ExtResource("3_14505")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k5lup"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wcc8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8sknh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gfpk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hrit")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14505"]
+size = Vector2(9, 18.421053)
 
 [node name="Player" type="CharacterBody2D" unique_id=1180427411]
 script = ExtResource("1_s027a")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1936234193]
+visible = false
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_rwm0n")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=435550842]
+position = Vector2(0, -1)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_k5lup")
+animation = &"walk"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1579933668]
-shape = SubResource("RectangleShape2D_0bojm")
+position = Vector2(0.5, 0.25000018)
+scale = Vector2(1, 0.95)
+shape = SubResource("RectangleShape2D_14505")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1490803983]
-zoom = Vector2(6, 6)
+offset = Vector2(0, -5)
+zoom = Vector2(5, 5)
 
 [node name="DashCooldown" type="Timer" parent="." unique_id=410096942]
 wait_time = 0.8
