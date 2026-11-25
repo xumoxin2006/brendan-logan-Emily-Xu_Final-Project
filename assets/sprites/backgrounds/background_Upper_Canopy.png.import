@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnso3npopqr3n"
-path="res://.godot/imported/background_tree_medium.png-de4a090049c85d7e6b2f669fc2d712c6.ctex"
+uid="uid://51036t415jse"
+path="res://.godot/imported/background_Upper_Canopy.png-2e154777e6e12607c2ed7ffc08a3928f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/bg/background_tree_medium.png"
-dest_files=["res://.godot/imported/background_tree_medium.png-de4a090049c85d7e6b2f669fc2d712c6.ctex"]
+source_file="res://assets/sprites/backgrounds/background_Upper_Canopy.png"
+dest_files=["res://.godot/imported/background_Upper_Canopy.png-2e154777e6e12607c2ed7ffc08a3928f.ctex"]
 
 [params]
 
