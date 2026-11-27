@@ -1,8 +1,57 @@
 [gd_scene format=3 uid="uid://dvgpsmhvy6pdh"]
 
-[ext_resource type="Texture2D" uid="uid://crdkp2h2k2uh5" path="res://icon.svg" id="1_rwm0n"]
 [ext_resource type="Script" uid="uid://djjbmg78wuvg0" path="res://assets/scripts/player.gd" id="1_s027a"]
+[ext_resource type="Texture2D" uid="uid://y76a6wdbfxky" path="res://assets/sprites/player/player_idle.png" id="2_4wcc8"]
+[ext_resource type="Texture2D" uid="uid://2ueeesmyd7b3" path="res://assets/sprites/player/player_jump.png" id="3_8sknh"]
 [ext_resource type="Texture2D" uid="uid://s3bc2mhx7bvu" path="res://assets/sprites/player/player_walk.png" id="3_14505"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cd4ww"]
+atlas = ExtResource("3_8sknh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5c66"]
+atlas = ExtResource("2_4wcc8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tc801"]
+atlas = ExtResource("2_4wcc8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60g6h"]
+atlas = ExtResource("2_4wcc8")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrrj1"]
+atlas = ExtResource("2_4wcc8")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6vv5"]
+atlas = ExtResource("2_4wcc8")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nh07x"]
+atlas = ExtResource("2_4wcc8")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00pic"]
+atlas = ExtResource("3_8sknh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bskb"]
+atlas = ExtResource("3_8sknh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dmvh"]
+atlas = ExtResource("3_8sknh")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ratp2"]
+atlas = ExtResource("3_8sknh")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84enu"]
+atlas = ExtResource("3_8sknh")
+region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4wcc8"]
 atlas = ExtResource("3_14505")
@@ -22,6 +71,57 @@ region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k5lup"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cd4ww")
+}],
+"loop": 1,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5c66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tc801")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60g6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hrrj1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6vv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nh07x")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_00pic")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_0bskb")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_1dmvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ratp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84enu")
+}],
+"loop": 1,
+"name": &"jump",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4wcc8")
@@ -46,16 +146,11 @@ size = Vector2(9, 18.421053)
 [node name="Player" type="CharacterBody2D" unique_id=1180427411]
 script = ExtResource("1_s027a")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1936234193]
-visible = false
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_rwm0n")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=435550842]
 position = Vector2(0, -1)
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_k5lup")
-animation = &"walk"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1579933668]
 position = Vector2(0.5, 0.25000018)

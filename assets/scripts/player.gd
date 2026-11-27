@@ -8,6 +8,7 @@ class_name Player;
 @export var acceleration: float = 0.12;
 @export var deceleration: float = 0.3;
 
+@onready var camera = $Camera2D;
 @onready var sprite = $AnimatedSprite2D
 @onready var coyote_time = $CoyoteTime;
 @onready var dash_cooldown = $DashCooldown;
@@ -29,6 +30,7 @@ func _ready() -> void:
 func platformer_movement(dt: float) -> void:
 	if not is_on_floor():
 		if (jumps == 0):
+			sprite.play("fall");
 			jumps = Global.max_jumps;
 		
 		if (coyote_time.is_stopped() and coyote_time_active):
@@ -56,8 +58,12 @@ func platformer_movement(dt: float) -> void:
 	else:
 		velocity.x = lerp(velocity.x, 0.0, cur_decel)
 		
-	if (velocity.x != 0 and is_on_floor()):
+	if (velocity.y == 0 and abs(velocity.x) > 2 and is_on_floor()):
 		sprite.play("walk");
+	elif (velocity.y == 0 and abs(velocity.x) <= 2 and is_on_floor()):
+		sprite.play("idle");
+	elif (velocity.y < 0):
+		sprite.play("jump");
 	
 	if (Globals.unlocked_dash and can_dash and Input.is_action_just_pressed("Dash")):
 		can_dash = false;
