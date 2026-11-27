@@ -63,6 +63,7 @@ func platformer_movement(dt: float) -> void:
 	elif (velocity.y == 0 and abs(velocity.x) <= 2 and is_on_floor()):
 		sprite.play("idle");
 	elif (velocity.y < 0):
+		sprite.sprite_frames.set_animation_loop("jump", false)
 		sprite.play("jump");
 	
 	if (Globals.unlocked_dash and can_dash and Input.is_action_just_pressed("Dash")):
