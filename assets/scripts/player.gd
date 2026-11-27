@@ -1,7 +1,8 @@
 extends CharacterBody2D
 class_name Player;
 
-@export var speed: float = 70;
+@export var hp: int = 3;
+@export var speed: float = 80;
 @export var jump_speed: float = -200;
 @export var dash_speed: float = 110;
 @export var dash_lift: float = 50;
@@ -13,6 +14,7 @@ class_name Player;
 @onready var coyote_time = $CoyoteTime;
 @onready var dash_cooldown = $DashCooldown;
 @onready var dash_length = $DashLength;
+@onready var iframe_timer = $IFramesDuration;
 
 var flip_h: bool = false;
 
@@ -20,12 +22,31 @@ var coyote_time_active: bool = false;
 var can_dash: bool = true;
 var dashing: bool = false;
 var climbing: bool = false;
+var iframes: bool = false;
 
 var jumps: int = 0;
 var cur_decel: float = deceleration;
 
 func _ready() -> void:
 	add_to_group("player");
+
+func check_death():
+	if (hp <= 0):
+		queue_free();
+
+func hurt(damage: int = 1):
+	hp-=damage;
+	sprite.modulate = Color.CRIMSON;
+	
+	if (hp == 2):
+		$Control/HP3.hide();
+	elif (hp == 1):
+		$Control/HP2.hide();
+	elif (hp == 0):
+		get_tree().change_scene_to_file("res://assets/scenes/ui/death_screen.tscn");
+	
+	iframes = true;
+	iframe_timer.start();
 
 func platformer_movement(dt: float) -> void:
 	if not is_on_floor():
@@ -107,6 +128,7 @@ func climb_movement() -> void:
 
 func _physics_process(delta: float) -> void:
 	sprite.flip_h = flip_h;
+	check_death();
 	
 	if (climbing):
 		climb_movement();
@@ -124,8 +146,12 @@ func _on_dash_cooldown_timeout() -> void:
 func _on_dash_length_timeout() -> void:
 	dashing = false;
 
+func _on_i_frames_duration_timeout() -> void:
+	sprite.modulate = Color.WHITE;
+	iframes = false;
+
 func debug_show_coyote_time():
 	if (coyote_time_active):
-		self.modulate = Color.AQUAMARINE;
+		sprite.modulate = Color.AQUAMARINE;
 	else:
-		self.modulate = Color.WHITE;
+		sprite.modulate = Color.WHITE;

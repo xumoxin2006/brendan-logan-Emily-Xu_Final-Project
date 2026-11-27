@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://d38exxkemgqcr"]
+
+[ext_resource type="Texture2D" uid="uid://bnso3npopqr3n" path="res://assets/sprites/backgrounds/background_tree_medium.png" id="1_33cvh"]
+[ext_resource type="Script" uid="uid://e4gvuryogqqi" path="res://assets/scripts/death_screen.gd" id="1_rhjok"]
+[ext_resource type="FontFile" uid="uid://g1o1s1775fje" path="res://assets/fonts/pirkkala.ttf" id="2_l5c4b"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5mwl8"]
+texture = ExtResource("1_33cvh")
+
+[node name="DeathScreen" type="Control" unique_id=258804285]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rhjok")
+
+[node name="Background" type="Panel" parent="." unique_id=154289672]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -577.0
+offset_top = -325.0
+offset_right = 577.0
+offset_bottom = 323.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_5mwl8")
+
+[node name="Died" type="Label" parent="." unique_id=239069927]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.5
+offset_top = -11.5
+offset_right = 34.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_l5c4b")
+theme_override_font_sizes/font_size = 128
+text = "You Died"
+
+[node name="Retry" type="Label" parent="." unique_id=1362181695]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = 67.0
+offset_right = 148.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_l5c4b")
+theme_override_font_sizes/font_size = 32
+text = "press space to retry"
