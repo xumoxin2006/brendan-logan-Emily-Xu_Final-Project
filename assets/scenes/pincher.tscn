@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://b2cm2jjtysg6q"]
+
+[ext_resource type="Script" uid="uid://cfhwapg437wbf" path="res://assets/scripts/pincher.gd" id="1_468nt"]
+[ext_resource type="Texture2D" uid="uid://crdkp2h2k2uh5" path="res://icon.svg" id="1_dvmh0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0bojm"]
+size = Vector2(24, 12)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0bojm"]
+radius = 83.0
+height = 246.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1m2t7"]
+size = Vector2(24, 12)
+
+[node name="Pincher" type="CharacterBody2D" unique_id=1144984477]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_468nt")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1198611951]
+modulate = Color(0.44382212, 0.2229257, 0.16029382, 1)
+position = Vector2(-4.7683716e-07, 0)
+scale = Vector2(0.2, 0.1)
+texture = ExtResource("1_dvmh0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=48657232]
+shape = SubResource("RectangleShape2D_0bojm")
+
+[node name="Detection" type="Area2D" parent="." unique_id=2055375952]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection" unique_id=770208078]
+position = Vector2(0, 1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_0bojm")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=388827578]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1423835112]
+shape = SubResource("RectangleShape2D_1m2t7")
+
+[connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
+[connection signal="body_exited" from="Detection" to="." method="_on_detection_body_exited"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

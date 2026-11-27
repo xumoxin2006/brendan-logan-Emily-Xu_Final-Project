@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://y76a6wdbfxky" path="res://assets/sprites/player/player_idle.png" id="2_4wcc8"]
 [ext_resource type="Texture2D" uid="uid://2ueeesmyd7b3" path="res://assets/sprites/player/player_jump.png" id="3_8sknh"]
 [ext_resource type="Texture2D" uid="uid://s3bc2mhx7bvu" path="res://assets/sprites/player/player_walk.png" id="3_14505"]
+[ext_resource type="Texture2D" uid="uid://bm3poirp516l" path="res://assets/sprites/hp.png" id="5_8sknh"]
+[ext_resource type="Texture2D" uid="uid://c7pkro21c7xch" path="res://assets/sprites/hp_empty.png" id="6_0gfpk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cd4ww"]
 atlas = ExtResource("3_8sknh")
@@ -144,6 +146,7 @@ animations = [{
 size = Vector2(9, 18.421053)
 
 [node name="Player" type="CharacterBody2D" unique_id=1180427411]
+collision_layer = 4
 script = ExtResource("1_s027a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=435550842]
@@ -173,6 +176,39 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="IFramesDuration" type="Timer" parent="." unique_id=1937262280]
+wait_time = 0.7
+one_shot = true
+
+[node name="Control" type="Control" parent="." unique_id=1311144188]
+z_index = 1000
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2.0
+offset_right = 42.0
+offset_bottom = 40.0
+
+[node name="HP1" type="Sprite2D" parent="Control" unique_id=1950401985]
+position = Vector2(-106, -61)
+texture = ExtResource("5_8sknh")
+
+[node name="HP2_empty" type="Sprite2D" parent="Control" unique_id=1196289388]
+position = Vector2(-86, -61)
+texture = ExtResource("6_0gfpk")
+
+[node name="HP2" type="Sprite2D" parent="Control" unique_id=1638781182]
+position = Vector2(-86, -61)
+texture = ExtResource("5_8sknh")
+
+[node name="HP3_empty" type="Sprite2D" parent="Control" unique_id=1338798038]
+position = Vector2(-66, -61)
+texture = ExtResource("6_0gfpk")
+
+[node name="HP3" type="Sprite2D" parent="Control" unique_id=244565866]
+position = Vector2(-66, -61)
+texture = ExtResource("5_8sknh")
+
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="DashLength" to="." method="_on_dash_length_timeout"]
 [connection signal="timeout" from="CoyoteTime" to="." method="_on_coyote_time_timeout"]
+[connection signal="timeout" from="IFramesDuration" to="." method="_on_i_frames_duration_timeout"]
