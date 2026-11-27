@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b2cm2jjtysg6q"]
+[gd_scene format=3 uid="uid://clq407810rs7k"]
 
 [ext_resource type="Script" uid="uid://cfhwapg437wbf" path="res://assets/scripts/pincher.gd" id="1_468nt"]
 [ext_resource type="Texture2D" uid="uid://crdkp2h2k2uh5" path="res://icon.svg" id="1_dvmh0"]

@@ -30,10 +30,6 @@ var cur_decel: float = deceleration;
 func _ready() -> void:
 	add_to_group("player");
 
-func check_death():
-	if (hp <= 0):
-		queue_free();
-
 func hurt(damage: int = 1):
 	hp-=damage;
 	sprite.modulate = Color.CRIMSON;
@@ -128,7 +124,6 @@ func climb_movement() -> void:
 
 func _physics_process(delta: float) -> void:
 	sprite.flip_h = flip_h;
-	check_death();
 	
 	if (climbing):
 		climb_movement();
